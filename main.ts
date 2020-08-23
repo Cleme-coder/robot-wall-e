@@ -19,4 +19,5 @@ basic.forever(function () {
     basic.pause(500)
     strip.showColor(neopixel.colors(NeoPixelColors.White))
     basic.pause(500)
+    music.startMelody(music.builtInMelody(Melodies.Nyan), MelodyOptions.OnceInBackground)
 })
