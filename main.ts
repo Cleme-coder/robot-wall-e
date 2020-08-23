@@ -1,23 +1,27 @@
-PCA9685.init(67, 0)
+let RR = 0
+let LL = 0
 basic.forever(function () {
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED1, 0, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED2, 100, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED3, 0, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED4, 100, 67)
-    basic.pause(2000)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED1, 100, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED2, 50, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED3, 100, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED4, 50, 67)
-    basic.pause(2000)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED1, 0, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED2, 50, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED3, 0, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED3, 100, 67)
-    basic.pause(1000)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED1, 0, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED1, 100, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED1, 0, 67)
-    PCA9685.setLedDutyCycle(PCA9685.LEDNum.LED1, 50, 67)
-    basic.pause(1000)
+    RR = pins.digitalReadPin(DigitalPin.P12)
+    LL = pins.digitalReadPin(DigitalPin.P13)
+    if (LL == 1 && RR == 0) {
+        basic.showLeds(`
+            . . . . #
+            . . . . #
+            . . . . #
+            . . . . #
+            . . . . #
+            `)
+    } else if (LL == 0 && RR == 1) {
+        basic.showLeds(`
+            # . . . .
+            # . . . .
+            # . . . .
+            # . . . .
+            # . . . .
+            `)
+    } else if (LL == 1 && RR == 1) {
+        basic.showIcon(IconNames.SmallHeart)
+    } else {
+        basic.showIcon(IconNames.Heart)
+    }
 })
